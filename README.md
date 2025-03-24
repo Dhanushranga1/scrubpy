@@ -237,13 +237,7 @@ This is where ScrubPy starts to feel like your **data science copilot**.
 
 ---
 
-#### 📹 Example GIF: ML-Powered Assistant in Action
 
-![ai-cleaning-demo](https://github.com/your-username/scrubpy/assets/ai-cleaning-demo.gif)
-
-> This simulation shows ScrubPy identifying missing values, running smart imputations, and applying fixes with user approval.
-
----
 
 #### 👩‍💻 Real-World Example
 
