@@ -2,6 +2,7 @@
 import pandas as pd
 import shutil
 import os
+import re
 
 # Store dataset history for undo functionality
 data_history = []
@@ -33,3 +34,10 @@ def confirm_action(action_name, df_before, df_after):
     print(get_dataset_summary(df_after))
     confirm = input("Do you want to proceed? (yes/no): ").strip().lower()
     return confirm == "yes"
+
+
+def clean_text_for_pdf(text):
+    import re
+    """Remove emojis and non-ASCII characters for PDF compatibility."""
+    text = text.replace("•", "-")
+    return re.sub(r"[^\x00-\x7F]+", "", text)

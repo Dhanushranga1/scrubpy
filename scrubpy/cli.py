@@ -11,10 +11,16 @@ from scrubpy.core import (
 from scrubpy.preview import preview_changes
 from scrubpy.profiling import DataProfiler
 from scrubpy.export_profiling_report import export_profiling_report
+from scrubpy.smart_eda import generate_smart_eda_pdf  # ✅ NEW
 
 app = typer.Typer()
 console = Console()
 previous_states = []  # 🔄 Stores previous versions for undo feature
+
+
+def clean_text_for_pdf(text):
+    text = text.replace("•", "-")
+    return re.sub(r"[^\x00-\x7F]+", "", text)
 
 # 🎨 Banner
 def show_banner():
@@ -49,6 +55,7 @@ def clean_data(df, dataset):
             choices=[
                 "📊 View Data Summary",
                 "📋 Profile My Dataset",
+                "🧠 Generate Smart EDA Report",  # ✅ NEW
                 "🚮 Handle Missing Values",
                 "🗑️ Remove Duplicates",
                 "🔡 Standardize Text",
@@ -78,6 +85,11 @@ def clean_data(df, dataset):
             if export:
                 export_profiling_report(df, dataset_name=dataset)
                 console.print("[bold green]✅ Profiling report exported successfully![/bold green]")
+
+        elif action == "🧠 Generate Smart EDA Report":
+            console.print("\n[bold cyan]📊 Generating Smart EDA PDF...[/bold cyan]")
+            generate_smart_eda_pdf(df, dataset_name=dataset)
+            console.print("[bold green]✅ EDA report generated as SmartEDA_Report.pdf![/bold green]")
 
         elif action == "🚮 Handle Missing Values":
             missing_percentage = (df.isnull().sum().sum() / df.size) * 100

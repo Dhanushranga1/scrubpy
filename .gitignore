@@ -1,1 +1,6 @@
 movies.csv
+scrubpy_profile_report.pdf
+/eda_outputs
+scrubpy_profile_report.txt
+plots/hist_RunTime.png
+plots/hist_RATING.png
