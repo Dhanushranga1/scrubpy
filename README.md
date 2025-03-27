@@ -29,5 +29,5 @@ PYTHONIOENCODING=utf-8 python -m scrubpy.cli
 ```
 
 ## License
-    MIT License
+    GNU General Public License v3.0
 
