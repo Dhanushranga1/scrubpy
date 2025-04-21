@@ -10,10 +10,11 @@ from scrubpy.utils import clean_text_for_pdf
 
 
 class SmartEDA:
-    def __init__(self, df: pd.DataFrame, dataset_name="dataset"):
+    def __init__(self, df: pd.DataFrame, dataset_name="dataset", extra_data=None):
         self.df = df
         self.name = dataset_name.replace(".csv", "")
         self.profiler = DataProfiler(df)
+        self.extra_data = extra_data or {}
         self.output_dir = f"eda_outputs/{self.name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         os.makedirs(self.output_dir, exist_ok=True)
 
