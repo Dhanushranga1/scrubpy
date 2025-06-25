@@ -1,19 +1,19 @@
 # ScrubPy – The Smartest Data Cleaner (Phase 1)
 
-> 🚀 A simple yet powerful command-line tool to help you clean and understand your datasets faster.
+>  A simple yet powerful command-line tool to help you clean and understand your datasets faster.
 
 ---
 
-## 🌊 About
+##  About
 ScrubPy is a lightweight CLI tool that simplifies common data cleaning tasks for students, data analysts, and researchers. It doesn't aim to be revolutionary – just helpful, smart, and fast.
 
 Phase 1 includes the core functionality: profiling, cleaning, previewing changes, and exporting reports.
 
 ---
 
-## 🔧 Features
+##  Features
 
-### 📊 Dataset Profiling
+### Dataset Profiling
 - Overview of rows, columns, memory usage
 - Missing value analysis
 - Duplicate detection
@@ -21,7 +21,7 @@ Phase 1 includes the core functionality: profiling, cleaning, previewing changes
 - Text column analysis (most common value, average word count, unique values)
 
 
-### 🚮 Cleaning Tools
+###  Cleaning Tools
 - Drop or fill missing values
 - Remove duplicates
 - Standardize text (lowercase + trim)
@@ -30,17 +30,17 @@ Phase 1 includes the core functionality: profiling, cleaning, previewing changes
 - Remove outliers (Z-score)
 - Undo last change
 
-### 📋 Export Profiling Report
+###  Export Profiling Report
 - Generates detailed `.txt` report with insights
 - Designed for human-readability and sharing
 
-### 🎨 Interactive CLI UI
+###  Interactive CLI UI
 - Built with Rich and InquirerPy
 - Provides preview before applying changes
 
 ---
 
-## 📝 Usage
+##  Usage
 
 ### 1. Clone this repo
 ```bash
@@ -84,17 +84,17 @@ scrubpy/
 
 ---
 
-## ✨ What’s Next?
+## What’s Next?
 We plan to add smart visual exports, column intelligence, and eventually ML-powered cleaning.
 
 ---
 
-## 🎉 Why This Exists
+##  Why This Exists
 Sometimes you just need a quick tool to clean and inspect your data without writing boilerplate pandas code. ScrubPy helps you do that, even if you're not a data wizard.
 
 ---
 
-## 📚 License
+##  License
 MIT
 
 ---
