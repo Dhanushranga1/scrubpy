@@ -1,0 +1,47 @@
+description: E-commerce and sales transaction data cleaning workflow
+metadata:
+  author: ScrubPy Enhanced
+  category: Sales
+  created: '2025-08-12T17:46:30.966920'
+  tags:
+  - sales
+  - ecommerce
+  - transactions
+  version: '1.0'
+name: Sales Data Cleaning
+operations:
+- description: Auto-detect and convert data types
+  enabled: true
+  params:
+    enable: true
+  type: convert_types
+- description: Validate currency values
+  enabled: true
+  params:
+    columns:
+    - price
+    - cost
+    - revenue
+    currency: USD
+  type: validate_currency
+- description: Standardize date formats
+  enabled: true
+  params:
+    columns:
+    - order_date
+    - ship_date
+    format: YYYY-MM-DD
+  type: standardize_dates
+- description: Detect price and quantity outliers
+  enabled: true
+  params:
+    action: Flag Only
+    method: IQR (Interquartile Range)
+  type: detect_outliers
+- description: Remove duplicate orders
+  enabled: true
+  params:
+    keep: first
+    subset:
+    - order_id
+  type: remove_duplicates

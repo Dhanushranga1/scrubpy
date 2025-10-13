@@ -254,7 +254,7 @@ def suggest_transformations(insights: Dict[str, Dict[str, Any]]) -> Dict[str, Li
             col_suggestions.append(f"Convert '{col}' to datetime using pd.to_datetime()")
         
         elif role == "monetary":
-            col_suggestions.append(f"Format '{col}' as currency with df['{col}'].map('${{:, .2f}}'.format)")
+            col_suggestions.append(f"Format '{col}' as currency, e.g.: df['{col}'].map(lambda x: f\"${{x:,.2f}}\")")
 
         
         elif role == "identifier" and insights_data.get("null_percent", 0) > 0:

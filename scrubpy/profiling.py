@@ -56,13 +56,13 @@ class DataProfiler:
     def display_rich_summary(self):
         """Print dataset overview in a Rich-styled table."""
         overview = self.dataset_overview()
-        table = Table(title="Dataset Overview")  # ✅ No emojis here
+        table = Table(title="Dataset Overview")  # Success No emojis here
 
         table.add_column("Metric", style="bold cyan")
         table.add_column("Value", style="magenta")
 
         for key, val in overview.items():
-            clean_key = str(key).encode("ascii", "ignore").decode("ascii")  # ✅ Removes emojis/surrogates
+            clean_key = str(key).encode("ascii", "ignore").decode("ascii")  # Success Removes emojis/surrogates
             clean_val = str(val).encode("ascii", "ignore").decode("ascii")
             table.add_row(clean_key, clean_val)
 
@@ -99,11 +99,11 @@ class DataProfiler:
         missing = self.df.isnull().sum()
         high_missing_cols = missing[missing > 0]
         if not high_missing_cols.empty:
-            suggestions.append("🛠️ Handle missing values (some columns have NaNs).")
+            suggestions.append("Tools Handle missing values (some columns have NaNs).")
 
         # Duplicate Rows
         if self.df.duplicated().sum() > 0:
-            suggestions.append("♻️ Remove duplicate rows.")
+            suggestions.append("Remove Remove duplicate rows.")
 
         # Column Name Formatting
         bad_colnames = [col for col in self.df.columns if ' ' in col or col != col.lower()]
@@ -122,4 +122,4 @@ class DataProfiler:
             if (z_scores.abs() > 3).sum() > 0:
                 suggestions.append(f"📉 Consider removing outliers in '{col}'.")
 
-        return suggestions if suggestions else ["✅ No major issues found. Your dataset looks good!"]
+        return suggestions if suggestions else ["Success No major issues found. Your dataset looks good!"]

@@ -1,0 +1,32 @@
+description: Clean survey and questionnaire response data
+metadata:
+  author: ScrubPy Enhanced
+  category: Research
+  created: '2025-08-12T17:46:30.966927'
+  tags:
+  - survey
+  - questionnaire
+  - research
+  version: '1.0'
+name: Survey Data Cleaning
+operations:
+- description: Remove duplicate survey responses
+  enabled: true
+  params:
+    keep: last
+  type: remove_duplicates
+- description: Clean text responses
+  enabled: true
+  params:
+    level: Basic
+  type: standardize_text
+- description: Handle missing survey responses
+  enabled: true
+  params:
+    strategy: Forward Fill
+  type: handle_missing
+- description: Remove questions with no variation
+  enabled: true
+  params:
+    enable: true
+  type: remove_low_variance

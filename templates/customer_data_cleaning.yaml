@@ -1,0 +1,47 @@
+description: Standard cleaning workflow for customer databases with contact information
+metadata:
+  author: ScrubPy Enhanced
+  category: CRM
+  created: '2025-08-12T17:46:30.966893'
+  tags:
+  - customer
+  - contact
+  - crm
+  version: '1.0'
+name: Customer Data Cleaning
+operations:
+- description: Remove duplicate customers based on email and phone
+  enabled: true
+  params:
+    keep: first
+    subset:
+    - email
+    - phone
+  type: remove_duplicates
+- description: Standardize name formatting
+  enabled: true
+  params:
+    columns:
+    - first_name
+    - last_name
+    level: Basic
+  type: standardize_text
+- description: Validate email addresses
+  enabled: true
+  params:
+    columns:
+    - email
+    remove_invalid: false
+  type: validate_email
+- description: Standardize phone number format
+  enabled: true
+  params:
+    columns:
+    - phone
+    format: international
+  type: standardize_phone
+- description: Smart missing value imputation
+  enabled: true
+  params:
+    strategy: Smart Auto
+  type: handle_missing

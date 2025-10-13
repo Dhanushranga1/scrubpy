@@ -1,0 +1,207 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scrubpy"
+description = "AI-powered data cleaning assistant with multiple interfaces"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "ScrubPy Team", email = "support@scrubpy.dev"}
+]
+maintainers = [
+    {name = "ScrubPy Team", email = "support@scrubpy.dev"}
+]
+keywords = [
+    "data cleaning",
+    "data preprocessing", 
+    "pandas",
+    "AI",
+    "machine learning",
+    "data science"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "pandas>=1.3.0",
+    "numpy>=1.21.0",
+    "scipy>=1.7.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "InquirerPy>=0.3.0",
+    "PyYAML>=6.0.0",
+    "pydantic>=1.10.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.11.0",
+    "plotly>=5.0.0",
+    "fpdf2>=2.5.0",
+    "streamlit>=1.25.0",
+    "streamlit-aggrid>=0.3.0",
+    "scikit-learn>=1.0.0",
+    "phonenumbers>=8.13.0",
+    "openpyxl>=3.0.0",
+    "xlrd>=2.0.0",
+    "pyarrow>=10.0.0",
+    "requests>=2.28.0",
+    "python-dateutil>=2.8.0"
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/Dhanushranga1/scrubpy"
+Documentation = "https://scrubpy.readthedocs.io"
+Repository = "https://github.com/Dhanushranga1/scrubpy.git"
+"Bug Reports" = "https://github.com/Dhanushranga1/scrubpy/issues"
+Changelog = "https://github.com/Dhanushranga1/scrubpy/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+ai = [
+    "ollama>=0.1.0",
+    "openai>=1.0.0",
+    "anthropic>=0.3.0",
+    "InquirerPy>=0.3.4",
+    "psutil>=5.8.0"
+]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=22.0",
+    "flake8>=4.0",
+    "mypy>=0.950",
+    "pre-commit>=2.15.0"
+]
+performance = [
+    "polars>=0.18.0",
+    "fastparquet>=0.8.0"
+]
+all = [
+    # Include all optional dependencies
+    "ollama>=0.1.0",
+    "openai>=1.0.0", 
+    "anthropic>=0.3.0",
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=22.0",
+    "flake8>=4.0",
+    "mypy>=0.950",
+    "polars>=0.18.0",
+    "fastparquet>=0.8.0"
+]
+
+[project.scripts]
+scrubpy = "scrubpy.cli:app"
+scrubpy-web = "scrubpy.web.launcher:main"
+scrubpy-chat = "scrubpy.chat_assistant:main"
+
+[tool.setuptools]
+packages = {find = {}}
+package-dir = {"" = "."}
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "scrubpy._version.__version__"}
+
+[tool.setuptools.package-data]
+scrubpy = [
+    "fonts/*",
+    "templates/*",
+    "config/*.yaml",
+    "config/*.json"
+]
+
+# Development Tools Configuration
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["scrubpy"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.coverage.run]
+source = ["scrubpy"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "setup.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "streamlit.*",
+    "plotly.*",
+    "seaborn.*",
+    "matplotlib.*",
+    "InquirerPy.*",
+    "fpdf.*"
+]
+ignore_missing_imports = true

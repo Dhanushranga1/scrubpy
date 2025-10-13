@@ -24,12 +24,12 @@ def export_profiling_report(df: pd.DataFrame, dataset_name="dataset", filename="
 
     report = [
         "=" * 30,
-        "📊 SCRUBPY PROFILING REPORT",
+        "Data SCRUBPY PROFILING REPORT",
         "=" * 30,
-        f"\n📁 Dataset: {dataset_name}",
+        f"\nDataset: {dataset_name}",
         f"🕒 Generated On: {now}",
         "-" * 40,
-        "🧠 Dataset Overview",
+        "AI Dataset Overview",
         "-" * 40,
         f"- Total Rows              : {df.shape[0]}",
         f"- Total Columns           : {df.shape[1]}",
@@ -56,7 +56,7 @@ def export_profiling_report(df: pd.DataFrame, dataset_name="dataset", filename="
 
     report += [
         "-" * 40,
-        "📈 Statistical Summary (Numeric Columns)",
+        "Statistical Summary (Numeric Columns)",
         "-" * 40
     ]
 
@@ -85,7 +85,7 @@ def export_profiling_report(df: pd.DataFrame, dataset_name="dataset", filename="
 
     report += [
         "-" * 40,
-        "📊 Correlation Matrix (Heatmap)",
+        "Data Correlation Matrix (Heatmap)",
         "-" * 40
     ]
     if len(numeric_cols) >= 2:
@@ -124,13 +124,13 @@ def export_profiling_report(df: pd.DataFrame, dataset_name="dataset", filename="
     # === Cleaning Recommendations ===
     report += [
         "-" * 40,
-        "🧠 Cleaning Recommendations",
+        "AI Cleaning Recommendations",
         "-" * 40
     ]
     if total_missing > 0:
-        report.append(f"- 🛠️ Handle missing values in: {list(missing_cols)}")
+        report.append(f"- Tools Handle missing values in: {list(missing_cols)}")
     if duplicates > 0:
-        report.append(f"- ♻️ Remove {duplicates} duplicate rows")
+        report.append(f"- Remove Remove {duplicates} duplicate rows")
     if any(" " in col or col.lower() != col for col in df.columns):
         report.append("- 🔠 Fix column names (spaces/capitalization issues)")
     if len(text_cols):
@@ -140,7 +140,7 @@ def export_profiling_report(df: pd.DataFrame, dataset_name="dataset", filename="
         if not stats.empty and (np.abs(zscore(stats)) > 3).sum() > 0:
             report.append(f"- 📉 Consider removing outliers in '{col}'")
 
-    report.append("\n📤 Export Completed Successfully")
+    report.append("\nExport Completed Successfully")
     report.append(f"Saved as: {filename}")
     report.append(f"📄 PDF Plots saved as: {pdf_path}")
 
@@ -149,4 +149,4 @@ def export_profiling_report(df: pd.DataFrame, dataset_name="dataset", filename="
         f.write("\n".join(report))
 
     pdf.close()
-    print(f"\n✅ Profiling report saved to '{filename}' and '{pdf_path}'!\n")
+    print(f"\nSuccess Profiling report saved to '{filename}' and '{pdf_path}'!\n")

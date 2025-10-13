@@ -1,0 +1,38 @@
+description: Clean financial and accounting data with conservative outlier detection
+metadata:
+  author: ScrubPy Enhanced
+  category: Finance
+  created: '2025-08-12T17:46:30.966933'
+  tags:
+  - financial
+  - accounting
+  - transactions
+  version: '1.0'
+name: Financial Data Cleaning
+operations:
+- description: Ensure numeric data types for financial columns
+  enabled: true
+  params:
+    enable: true
+  type: convert_types
+- description: Detect financial outliers (conservative approach)
+  enabled: true
+  params:
+    action: Flag Only
+    method: Modified Z-Score
+  type: detect_outliers
+- description: Standardize transaction dates
+  enabled: true
+  params:
+    format: YYYY-MM-DD
+  type: standardize_dates
+- description: Interpolate missing financial values
+  enabled: true
+  params:
+    strategy: Interpolation
+  type: handle_missing
+- description: Remove duplicate transactions
+  enabled: true
+  params:
+    keep: first
+  type: remove_duplicates

@@ -1,0 +1,77 @@
+# Include additional data files in package distribution
+
+# Documentation files
+include README.md
+include LICENSE
+include CHANGELOG.md
+recursive-include docs *.md *.rst *.txt
+
+# Configuration and template files
+recursive-include scrubpy/config *.py *.yaml *.json *.toml
+recursive-include scrubpy/web *.py
+recursive-include scrubpy/utils *.py
+recursive-include templates *.yaml *.json *.toml
+
+# Font files for PDF generation
+recursive-include scrubpy/fonts *.ttf *.pkl
+
+# Web interface static files
+recursive-include scrubpy/web *.html *.css *.js *.png *.jpg *.ico
+
+# Example and sample data files (if any)
+recursive-include examples *.py *.csv *.xlsx *.json
+recursive-include sample_data *.csv *.xlsx *.json
+
+# Requirements files
+include requirements.txt
+include requirements-dev.txt
+
+# Build and packaging files
+include pyproject.toml
+include setup.py
+include setup.cfg
+
+# Version control and CI files (exclude)
+global-exclude .git*
+global-exclude .DS_Store
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude *.so
+global-exclude .pytest_cache
+global-exclude .coverage
+global-exclude .tox
+global-exclude .venv
+global-exclude venv
+global-exclude .env
+
+# Test files (exclude)
+global-exclude test_*
+global-exclude *_test.py
+recursive-exclude tests *
+recursive-exclude test *
+
+# Development and temporary files (exclude)
+global-exclude *.log
+global-exclude *.tmp
+global-exclude *.temp
+global-exclude *~
+global-exclude .#*
+global-exclude *.orig
+global-exclude *.rej
+
+# IDE files (exclude)
+global-exclude .vscode
+global-exclude .idea
+global-exclude *.swp
+global-exclude *.swo
+
+# Build artifacts (exclude)
+global-exclude build
+global-exclude dist
+global-exclude *.egg-info
+
+# Jupyter notebooks (exclude unless specifically needed)
+global-exclude *.ipynb
+global-exclude .ipynb_checkpoints
