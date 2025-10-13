@@ -1,261 +1,185 @@
-# 🧹 ScrubPy – AI-Powered Data Cleaning Made Simple
+# ScrubPy
 
 [![PyPI version](https://badge.fury.io/py/scrubpy.svg)](https://badge.fury.io/py/scrubpy)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **Transform messy data into clean, analysis-ready datasets with AI assistance, interactive web interface, and powerful CLI tools.**
+## Introduction
 
----
+ScrubPy is a comprehensive Python library for intelligent data cleaning and preprocessing. It provides multiple interfaces including a web application, CLI tools, and AI-powered chat assistance to help data scientists, analysts, and researchers transform messy datasets into clean, analysis-ready formats. The library combines automated quality analysis with intelligent suggestions to streamline the data preparation workflow.
 
-## What is ScrubPy?
+## Key Features
 
-ScrubPy is an advanced data cleaning toolkit that combines AI-powered intelligence with user-friendly interfaces. Whether you're a data scientist, analyst, or researcher, ScrubPy helps you clean and understand your datasets faster than ever.
+- **Multi-Interface Support**: Web GUI (Streamlit), Command Line Interface (CLI), and Interactive Chat Assistant
+- **AI-Powered Analysis**: Integration with Large Language Models for intelligent data cleaning recommendations
+- **Comprehensive Quality Assessment**: Automated detection of missing values, duplicates, outliers, and data type inconsistencies
+- **Smart Cleaning Operations**: Automated and guided data cleaning with preview capabilities
+- **Professional Reporting**: Generate detailed PDF reports and export cleaned datasets
 
-### Key Highlights
-- **AI-Powered**: LLM integration for intelligent data cleaning suggestions
-- **🌐 Web Interface**: Modern Streamlit-based GUI with drag-and-drop
-- **💬 Chat Assistant**: Interactive AI guide for data cleaning workflows  
-- **CLI Tools**: Rich terminal interface with progress indicators
-- **Smart Analysis**: Automated EDA with quality scoring
-- **Professional Reports**: Generate PDF reports and insights
+## Architecture Overview
 
----
+ScrubPy follows a modular architecture where users can interact through multiple interfaces (Web, CLI, Chat) that all utilize the same core data processing engine. The workflow starts with data loading through the core module, followed by quality analysis using the quality analyzer, interactive cleaning operations with preview capabilities, and finally export of cleaned data with comprehensive reporting. The AI components provide intelligent suggestions throughout the process.
 
-## � Quick Start
+## Installation
 
-### Installation
-
-Install ScrubPy with a single command:
+Install ScrubPy using pip:
 
 ```bash
 pip install scrubpy
 ```
 
-### Usage Options
+For AI features, install with additional dependencies:
 
-**🌐 Web Interface** (Recommended for beginners):
 ```bash
-scrubpy-web
+pip install scrubpy[ai]
 ```
 
-**💬 AI Chat Assistant**:
-```bash
-scrubpy-chat your_data.csv
+## Module Documentation
+
+### Core Module (`scrubpy.core`)
+
+The core module provides fundamental data loading and cleaning operations:
+
+- `load_dataset(file_path)`: Intelligent data loading with automatic format detection for CSV, JSON, Excel, and Parquet files
+- `get_dataset_summary(df)`: Comprehensive dataset overview including shape, column types, and basic statistics
+- `remove_duplicates(df, method)`: Advanced duplicate detection with configurable strategies
+- `fill_missing_values(df, method, columns)`: Multiple imputation methods including mean, median, mode, and forward/backward fill
+- `detect_outliers(df, method)`: Statistical outlier detection using IQR, Z-score, and isolation forest methods
+- `convert_data_types(df)`: Automatic data type optimization and conversion
+
+### Quality Analyzer Module (`scrubpy.quality_analyzer`)
+
+Intelligent quality assessment system:
+
+- `SmartDataQualityAnalyzer`: Main analyzer class providing comprehensive quality scoring
+- `analyze_quality(df)`: Complete quality analysis returning issue detection and recommendations
+- `QualityIssue` dataclass: Structured representation of detected data quality issues
+- Quality scoring algorithms for completeness, consistency, validity, and uniqueness metrics
+
+### CLI Module (`scrubpy.cli`)
+
+Interactive command-line interface:
+
+- Rich terminal interface with progress indicators and colored output
+- Interactive dataset selection and preview capabilities
+- Step-by-step guided cleaning workflow
+- Export options for cleaned datasets and quality reports
+
+### Web Interface (`scrubpy.web`)
+
+Modern Streamlit-based web application:
+
+- Drag-and-drop file upload with format validation
+- Real-time data preview with pagination
+- Interactive quality dashboard with visual indicators
+- One-click cleaning operations with preview capabilities
+- Export functionality for multiple formats
+
+## Usage Examples
+
+### Basic Data Cleaning
+
+```python
+import scrubpy
+
+# Load your dataset
+df = scrubpy.load_dataset("data.csv")
+
+# Analyze data quality
+analyzer = scrubpy.SmartDataQualityAnalyzer()
+quality_report = analyzer.analyze_quality(df)
+
+# Clean the data
+clean_df = scrubpy.remove_duplicates(df)
+clean_df = scrubpy.fill_missing_values(clean_df, method="mean", numeric_only=True)
+clean_df = scrubpy.detect_outliers(clean_df, method="iqr")
 ```
-
-**CLI Interface**:
-```bash
-scrubpy
-```
-
----
-
-## Features
-
-### AI-Powered Intelligence
-- **Smart Suggestions**: AI analyzes your data and recommends cleaning steps
-- **Natural Language Processing**: Advanced text cleaning and normalization
-- **Quality Scoring**: Automatic data quality assessment and insights
-- **Pattern Recognition**: Detect and fix common data issues automatically
-
-### 🌐 Modern Interfaces
-- **Web App**: Drag-and-drop file upload with real-time previews
-- **Chat Assistant**: Conversational AI guide for cleaning workflows
-- **Rich CLI**: Beautiful terminal interface with progress bars and colors
-
-### Advanced Analytics
-- **Smart EDA**: Automated exploratory data analysis
-- **Quality Reports**: Comprehensive data quality assessments
-- **Visual Insights**: Generate correlation heatmaps and distributions
-- **PDF Exports**: Professional reports for stakeholders
-
-### Powerful Cleaning Tools
-- **Missing Values**: Smart imputation strategies
-- **Duplicates**: Advanced duplicate detection and removal
-- **Outliers**: Statistical outlier detection and handling
-- **Data Types**: Intelligent type inference and conversion
-- **Text Processing**: Advanced text standardization and cleaning
-- **Validation**: Email, phone number, and custom validation rules
-
----
-
-## � Usage Examples
 
 ### Command Line Interface
 ```bash
 # Launch interactive CLI
 scrubpy
 
-# Quick clean with default settings
-scrubpy clean data.csv --output cleaned_data.csv
-
-# Generate quality report
-scrubpy analyze data.csv --report
+# Follow the interactive prompts to clean your data
 ```
 
-### Python API
+### Web Interface Usage
+
+```bash
+# Start the web application
+scrubpy-web
+
+# Navigate to http://localhost:8501 in your browser
+# Upload your dataset and follow the interactive cleaning workflow
+```
+
+### AI Chat Assistant
+
+```bash
+# Start chat mode with your dataset
+scrubpy-chat data.csv
+
+# Interact with the AI assistant using natural language:
+# "What quality issues does my data have?"
+# "Remove duplicates and handle missing values"
+# "Generate a quality report"
+```
+
+## API Reference
+
+### Core Functions
+
 ```python
-import scrubpy as sp
+import scrubpy
 
-# Load and analyze data
-df = sp.load_data('messy_data.csv')
-quality_score = sp.analyze_quality(df)
+# Data loading
+df = scrubpy.load_dataset(file_path, **kwargs)
 
-# AI-powered cleaning
-cleaned_df = sp.smart_clean(df, ai_suggestions=True)
+# Quality analysis
+analyzer = scrubpy.SmartDataQualityAnalyzer()
+issues = analyzer.analyze_quality(df)
 
-# Export results
-sp.export_data(cleaned_df, 'cleaned_data.csv')
-sp.generate_report(df, cleaned_df, 'quality_report.pdf')
+# Data cleaning operations
+clean_df = scrubpy.remove_duplicates(df, method='exact')
+clean_df = scrubpy.fill_missing_values(df, method='mean')
+outliers = scrubpy.detect_outliers(df, method='iqr')
 ```
 
----
+## System Requirements
 
-## 🛠️ Installation & Setup
-
-### System Requirements
 - **Python**: 3.8 or higher
-- **OS**: Windows, macOS, Linux
-- **RAM**: 2GB minimum (4GB recommended for large datasets)
+- **Operating System**: Windows, macOS, Linux
+- **Memory**: 2GB minimum (4GB recommended for large datasets)
+- **Storage**: 100MB for installation
 
-### Installing from PyPI
-```bash
-# Install latest stable version
-pip install scrubpy
+## Contributing
 
-# Install with all AI features
-pip install scrubpy[ai]
+We welcome contributions to ScrubPy! Please follow these guidelines:
 
-# Install development version
-pip install scrubpy[dev]
-```
-
-### Verify Installation
-```bash
-scrubpy --version
-scrubpy-web --help
-scrubpy-chat --help
-```
-
----
-
-## 🏗️ Architecture
-
-ScrubPy is built with modern Python practices and modular design:
-
-```
-scrubpy/
-├── core.py              # Core data processing engine  
-├── cli.py               # Rich CLI interface
-├── chat_assistant.py    # AI chat interface
-├── quality_analyzer.py  # Data quality assessment
-├── llm_utils.py         # AI/LLM integration
-├── eda_analysis.py      # Exploratory data analysis
-├── validation.py        # Data validation rules
-├── web/                 # Streamlit web interface
-├── config/              # Configuration templates
-└── utils/               # Utility functions
-```
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! See our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+1. Fork the repository and create a feature branch
+2. Write tests for new functionality
+3. Ensure code follows PEP 8 style guidelines
+4. Submit a pull request with a clear description of changes
 
 ### Development Setup
-```bash
-git clone https://github.com/dhanushranga1/scrubpy.git
-cd scrubpy
-pip install -e .[dev]
-```
 
-### Running Tests
 ```bash
+git clone https://github.com/username/scrubpy.git
+cd scrubpy
+pip install -e ".[dev]"
 pytest tests/
 ```
 
----
+## License
 
-## Performance
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-ScrubPy is optimized for performance:
-- **Memory Efficient**: Processes large datasets with minimal RAM usage
-- **Fast Processing**: Vectorized operations with pandas and numpy
-- **Streaming Support**: Handle datasets larger than memory
-- **Parallel Processing**: Multi-core support for intensive operations
+## Acknowledgments
 
----
-
-## Use Cases
-
-### Data Science Workflows
-- **EDA**: Quick exploratory data analysis
-- **Preprocessing**: Clean data before ML pipelines  
-- **Quality Assessment**: Validate data quality metrics
-
-### Business Analytics
-- **CRM Data**: Clean customer databases
-- **Sales Data**: Process transaction records
-- **Survey Data**: Clean and standardize responses
-
-### Research & Academia
-- **Dataset Preparation**: Clean research datasets
-- **Statistical Analysis**: Prepare data for statistical tests
-- **Report Generation**: Create professional data quality reports
-
----
-
-## 🔗 Links
-
-- **Documentation**: [Full documentation and API reference](docs/)
-- **GitHub**: [Source code and issues](https://github.com/dhanushranga1/scrubpy)
-- **PyPI**: [Package on Python Package Index](https://pypi.org/project/scrubpy/)
-- **Changelog**: [Release history and updates](CHANGELOG.md)
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-ScrubPy is built on the shoulders of giants:
-- **pandas** & **numpy** for data processing
-- **Streamlit** for the beautiful web interface
-- **Typer** & **Rich** for the modern CLI experience
-- **scikit-learn** for machine learning utilities
-
----
-
-**Made with ❤️ for the data community**
-
----
-
-## 🌐 Folder Structure
-```
-scrubpy/
-├── cli.py                    # Main CLI interface
-├── core.py                   # Core cleaning logic
-├── preview.py                # Preview operations before applying
-├── profiling.py              # Dataset profiling & suggestions
-├── export_profiling_report.py# Export detailed profiling reports
-```
-
----
-
-## 🛠️ Requirements
-- Python 3.8+
-- pandas
-- numpy
-- typer
-- rich
-- InquirerPy
-- scipy
+- Built with pandas and numpy for efficient data processing
+- Streamlit for the modern web interface
+- Typer and Rich for enhanced CLI experience
+- OpenAI for AI-powered features
 
 ---
 
