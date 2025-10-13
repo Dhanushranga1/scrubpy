@@ -2,7 +2,7 @@
 ScrubPy package metadata and version information.
 """
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 __author__ = "Dhanush Ranga"
 __email__ = "dhanushranga1@gmail.com"
 __description__ = "AI-powered data cleaning assistant with multiple interfaces"
